@@ -68,13 +68,13 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   _loginWithEmail() {
-    FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: _email,
-        password: _password,
-    ).then((FirebaseUser user) {
-      Navigator.of(context).pushReplacementNamed('/homepage');
-    }).catchError((e) {
-      print(e);
-    });
+//    FirebaseAuth.instance.signInWithEmailAndPassword(
+//        email: _email,
+//        password: _password,
+//    ).then((FirebaseUser user) {
+//      Navigator.of(context).pushReplacementNamed('/homepage');
+//    }).catchError((e) {
+//      print(e);
+//    });
   }
 }

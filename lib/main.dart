@@ -1,5 +1,7 @@
+import 'package:app_auth/dashboardpage.dart';
 import 'package:app_auth/homepage.dart';
 import 'package:app_auth/loginpage.dart';
+import 'package:app_auth/registerpage.dart';
 import 'package:app_auth/signuppage.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -16,18 +18,16 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      home: LoginPage(),
-      routes: <String, WidgetBuilder> {
-        '/landingPage' : (BuildContext context) => MyApp(),
-        '/homePage' : (BuildContext context) => HomePage(),
-        '/signup' : (BuildContext context) => SignupPage(),
-      },
+      //home: LoginPage(),
+//      routes: <String, WidgetBuilder> {
+//        '/landingPage' : (BuildContext context) => MyApp(),
+//        '/homePage' : (BuildContext context) => HomePage(),
+//        '/signup' : (BuildContext context) => SignupPage(),
+//      },
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-//      home: MyHomePage(
-//
-//      ),
+      home: MyHomePage(),
     );
   }
 }
@@ -39,15 +39,15 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
 
-  final emailTextController = TextEditingController();
-  final passwordTextController = TextEditingController();
-
-  @override
-  void dispose() {
-    emailTextController.dispose();
-    passwordTextController.dispose();
-    super.dispose();
-  }
+//  final emailTextController = TextEditingController();
+//  final passwordTextController = TextEditingController();
+//
+//  @override
+//  void dispose() {
+//    emailTextController.dispose();
+//    passwordTextController.dispose();
+//    super.dispose();
+//  }
 
   @override
   Widget build(BuildContext context) {
@@ -61,65 +61,65 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            SizedBox(
-              width: 360,
-              child: TextFormField(
-                validator: (input) {
-                  if(input.isEmpty) {
-                    return 'Please type an email';
-                  } else {
-                    return null;
-                  }
-                },
-                decoration: InputDecoration(
-                  labelText: "Email"
-                ),
-                controller: emailTextController,
-              ),
-            ),
+//            SizedBox(
+//              width: 360,
+//              child: TextFormField(
+//                validator: (input) {
+//                  if(input.isEmpty) {
+//                    return 'Please type an email';
+//                  } else {
+//                    return null;
+//                  }
+//                },
+//                decoration: InputDecoration(
+//                  labelText: "Email"
+//                ),
+//                controller: emailTextController,
+//              ),
+//            ),
+//
+//            SizedBox(
+//              width: 360,
+//              child: TextFormField(
+//                obscureText: true,
+//                validator: (input) {
+//                  if(input.isEmpty) {
+//                    return 'Please type an password';
+//                  } else {
+//                    return null;
+//                  }
+//                },
+//                decoration: InputDecoration(
+//                    labelText: "Password"
+//                ),
+//                controller: passwordTextController,
+//              ),
+//            ),
+//
+//            SizedBox(
+//              height: 28,
+//            ),
 
-            SizedBox(
-              width: 360,
-              child: TextFormField(
-                obscureText: true,
-                validator: (input) {
-                  if(input.isEmpty) {
-                    return 'Please type an password';
-                  } else {
-                    return null;
-                  }
-                },
-                decoration: InputDecoration(
-                    labelText: "Password"
-                ),
-                controller: passwordTextController,
-              ),
-            ),
-
-            SizedBox(
-              height: 28,
-            ),
-
-            SizedBox(
-              width: 360,
-              child: RaisedButton(
-                child: Row(
-                  children: <Widget>[
-                    Icon(Icons.mail, size: 30),
-                    Text(
-                      'Sign up with Email',
-                      style: TextStyle(fontSize: 28)
-                    )
-                  ],
-                ),
-                textColor: Colors.white,
-                color: Colors.red,
-                padding: const EdgeInsets.all(10),
-                onPressed: () {
-                  signUpWithMail();
-                },
-              ),
-            ),
+//            SizedBox(
+//              width: 360,
+//              child: RaisedButton(
+//                child: Row(
+//                  children: <Widget>[
+//                    Icon(Icons.mail, size: 30),
+//                    Text(
+//                      'Sign up with Email',
+//                      style: TextStyle(fontSize: 28)
+//                    )
+//                  ],
+//                ),
+//                textColor: Colors.white,
+//                color: Colors.red,
+//                padding: const EdgeInsets.all(10),
+//                onPressed: () {
+//                  signUpWithMail();
+//                },
+//              ),
+//            ),
 
             SizedBox(height: 20,),
 
@@ -162,6 +162,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 color: Colors.green,
                 padding: const EdgeInsets.all(10),
                 onPressed: () {
+
                   signUpWithGoogle();
                 },
               ),
@@ -185,35 +186,51 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
-  Future<void> signUpWithMail() async {
-    try {
-      FirebaseUser user = (await FirebaseAuth.instance.createUserWithEmailAndPassword(
-          email: emailTextController.text,
-          password: passwordTextController.text,
-      )).user;
-      showDialog(
-        context: context,
-        builder: (context) {
-          return AlertDialog(
-            content: Text("Sign up user success"),
-          );
-        }
-      );
-    } catch(e) {
-      print(e.message);
-      showDialog(
-        context: context,
-        builder: (context) {
-          return AlertDialog(
-            content: Text(e.message),
-          );
-        },
-      );
-    }
-  }
+//  Future<void> signUpWithMail() async {
+//    try {
+//      FirebaseUser user = (await FirebaseAuth.instance.createUserWithEmailAndPassword(
+//          email: emailTextController.text,
+//          password: passwordTextController.text,
+//      )).user;
+//
+//      bool isAlreadyRegistered() {
+//        if(user != null) {
+//          return true;
+//        } else {
+//          return false;
+//        }
+//      }
+//      if(isAlreadyRegistered()) {
+//        Navigator.push(
+//          context,
+//          MaterialPageRoute(builder: (context) => DashboardPage()),
+//        );
+//      } else {
+//
+//      }
+//      showDialog(
+//        context: context,
+//        builder: (context) {
+//          return AlertDialog(
+//            content: Text("Sign up user success"),
+//          );
+//        }
+//      );
+//    } catch(e) {
+//      print(e.message);
+//      showDialog(
+//        context: context,
+//        builder: (context) {
+//          return AlertDialog(
+//            content: Text(e.message),
+//          );
+//        },
+//      );
+//    }
+//  }
 
   Future<void> signUpWithFacebook() async {
-    try {
+
       var facebookLogin = new FacebookLogin();
       var result = await facebookLogin.logIn(['email']);
 
@@ -221,18 +238,27 @@ class _MyHomePageState extends State<MyHomePage> {
         final AuthCredential credential = FacebookAuthProvider.getCredential(
           accessToken: result.accessToken.token,
         );
-        
-        final FirebaseUser user = (await FirebaseAuth.instance.signInWithCredential(credential)).user;
-        print('Signed in ' + user.displayName);
-        return user;
+        try {
+          final FirebaseUser user = (await FirebaseAuth.instance.signInWithCredential(credential)).user;
+          print('Signed in ' + user.displayName);
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => RegisterPage()),
+          );
+          return user;
+
+        } catch(e) {
+          print(e.message);
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => DashboardPage()),
+          );
+        }
+
       }
-    } catch(e) {
-      print(e.message);
-    }
   }
 
   Future<void> signUpWithGoogle() async {
-    try {
       final GoogleSignIn _googleSignIn = GoogleSignIn(
         scopes: [
           'email'
@@ -240,23 +266,36 @@ class _MyHomePageState extends State<MyHomePage> {
         hostedDomain: '',
         clientId: '',
       );
-      final FirebaseAuth _auth = FirebaseAuth.instance;
+      //final FirebaseAuth _auth = FirebaseAuth.instance;
 
       final GoogleSignInAccount googleUser = await _googleSignIn.signIn();
+
       final GoogleSignInAuthentication googleAuth = await googleUser.authentication;
 
       final AuthCredential credential = GoogleAuthProvider.getCredential(
-          idToken: googleAuth.idToken,
-          accessToken: googleAuth.accessToken,
+        idToken: googleAuth.idToken,
+        accessToken: googleAuth.accessToken,
       );
 
-      final FirebaseUser user = (await _auth.signInWithCredential(credential)).user;
-      print("Signed in " + user.displayName);
+      try {
+        final FirebaseUser user = (await FirebaseAuth.instance.signInWithCredential(credential)).user;
+        print("Signed in " + user.displayName);
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => DashboardPage()),
+        );
+        return user;
 
-      return user;
-    } catch(e) {
-      print(e.message);
-    }
+      } catch(e) {
+        print(e.message);
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => RegisterPage()),
+        );
+      }
+
+        //return user;
+
   }
 
   _logOut() {
